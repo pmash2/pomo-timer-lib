@@ -1,9 +1,9 @@
 import Stopwatch from "./stopwatch"
 import { Time, TimeUtilities } from "./time-formatter"
 import sleep from "./sleep";
-import { eventEmitter } from "./eventEmitter";
+import EventEmitter from "events";
 
-export default class Timer {
+export default class Timer extends EventEmitter {
     private Watch: Stopwatch;
     public Span: Time;
 
@@ -13,6 +13,7 @@ export default class Timer {
     }
 
     constructor(timerLength: Time) {
+        super();
         this.Watch = new Stopwatch();
         this.Span = timerLength;
     }
@@ -26,7 +27,7 @@ export default class Timer {
             await sleep(1000);
         }
 
-        eventEmitter.emit("TIMER_COMPLETE");
+        this.emit("TIMER_COMPLETE");
     }
 
     stop() {

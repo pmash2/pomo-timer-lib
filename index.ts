@@ -2,7 +2,6 @@ import Stopwatch from './stopwatch';
 import sleep from './sleep';
 import { TimeUtilities } from './time-formatter';
 import Timer from './timer';
-import { eventEmitter } from './eventEmitter';
 
 const runTimer = async (timer: Stopwatch, length: number) => {
     timer.start();
@@ -40,6 +39,10 @@ const stopwatchTest = async () => {
 
 const timerTest = async () => {
     let timer = new Timer({Hours: 0, Minutes: 0, Seconds: 5, Milliseconds: 0});
+    timer.on("TIMER_COMPLETE", () => {
+        console.log("THE TIMER HAS COMPLETED!");
+    });
+
     timer.start();
     await sleep(2000);
     console.log(`Remaining: ${TimeUtilities.timeToString(timer.Remaining)}`);
@@ -47,10 +50,6 @@ const timerTest = async () => {
 
 const main = async () => {
     console.log("Hello world");
-
-    eventEmitter.on("TIMER_COMPLETE", () => {
-        console.log("THE TIMER HAS COMPLETED!");
-    });
 
     await timerTest();
     await sleep(8000);
