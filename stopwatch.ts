@@ -1,10 +1,12 @@
 export default class Stopwatch {
     private StartTime: number;
-    public Elapsed: number;
+
+    get Elapsed(): number {
+        return Date.now() - this.StartTime;
+    }
     
     constructor() {
         this.StartTime = 0;
-        this.Elapsed = 0;
     }
 
     start() {
@@ -14,7 +16,6 @@ export default class Stopwatch {
 
     stop() {
         console.log(`Stopped stopwatch at ${Date.now()}`);
-        this.Elapsed += Date.now() - this.StartTime;
         this.StartTime = 0;
     }
 }

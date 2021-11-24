@@ -1,5 +1,7 @@
 import Stopwatch from "./stopwatch"
 import { Time, TimeUtilities } from "./time-formatter"
+import sleep from "./sleep";
+import { eventEmitter } from "./eventEmitter";
 
 export default class Timer {
     private Watch: Stopwatch;
@@ -15,9 +17,16 @@ export default class Timer {
         this.Span = timerLength;
     }
 
-    start() {
+    async start() {
         console.log("Starting timer...");
         this.Watch.start();
+
+        let spanMs = TimeUtilities.TimeToMs(this.Span);
+        while (spanMs > this.Watch.Elapsed) {
+            await sleep(1000);
+        }
+
+        eventEmitter.emit("TIMER_COMPLETE");
     }
 
     stop() {
