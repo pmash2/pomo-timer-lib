@@ -29,6 +29,16 @@ export class TimeUtilities {
         return tm;
     }
 
+    static TimeToMs = (tm: Time): number => {
+        let totalMs = 0;
+        totalMs += tm.Hours * 3.6e+6;
+        totalMs += tm.Minutes * 60000;
+        totalMs += tm.Seconds * 1000;
+        totalMs += tm.Milliseconds;
+
+        return totalMs;
+    }
+
     static timeToString = (tm: Time): string => {
         let timeString = "";
 
@@ -49,4 +59,20 @@ export class TimeUtilities {
         let tm = TimeUtilities.msToTime(ms);
         return TimeUtilities.timeToString(tm);
     }
+
+    static diff = (greaterTime: Time, lesserTime: Time): Time => {
+        let gMs = this.TimeToMs(greaterTime);
+        let lMs = this.TimeToMs(lesserTime);
+        let diffMs = gMs - lMs;
+
+        return this.msToTime(diffMs);
+    }
+
+    static diffString = (greaterTime: Time, lesserTime: Time): string => {
+        let tmDiff = this.diff(greaterTime, lesserTime);
+
+        return this.timeToString(tmDiff);
+    }
 }
+
+export { Time }
