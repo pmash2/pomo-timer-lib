@@ -8,8 +8,10 @@ Thanks to `ts-node`, you can run via `npm start` without compiling. Otherwise, `
 
 ## Development
 
-Instead of publishing to the global npm registry, I've been using [yalc](https://github.com/wclr/yalc) to keep changes local. Here is the workflow:
+To create local packages for use in other projects:
 
-1. Make changes to pomo-timer-lib, commit, tag
-2. `yalc publish`
-3. Inside the project that will be using this package, run `yalc add pomo-timer-lib`
+1. Increment version in `package.json`
+2. Run `npm pack`
+3. Take `.tgz` file that was created and move it to a local package location (e.g., `~/source/npm_packages`)
+4. Go to the project you want to use package in
+5. Run `npm install`, pointing to the location you placed the package (e.g., `npm install ~/source/npm_packages/pomo-timer-lib-0.1.2.tgz`)
