@@ -1,6 +1,7 @@
 import Stopwatch from './stopwatch';
 import sleep from './sleep';
 import { TimeUtilities } from './time-formatter';
+import Timer from './timer';
 
 const runTimer = async (timer: Stopwatch, length: number) => {
     timer.start();
@@ -25,9 +26,7 @@ const calculateDiff2 = (tm1: Stopwatch, tm2: Stopwatch) => {
     console.log(`Difference 2: ${TimeUtilities.timeToString(diff)}`);
 }
 
-const main = async () => {
-    console.log("Hello world");
-
+const stopwatchTest = async () => {
     let tm1 = new Stopwatch();
     await runTimer(tm1, 2000);
 
@@ -36,6 +35,20 @@ const main = async () => {
 
     calculateDiff(tm1, tm2);
     calculateDiff2(tm1, tm2);
+}
+
+const timerTest = async () => {
+    let timer = new Timer({Hours: 0, Minutes: 0, Seconds: 5, Milliseconds: 0});
+    timer.start();
+    await sleep(2000);
+    timer.stop();
+    console.log(`Remaining: ${TimeUtilities.timeToString(timer.Remaining)}`);
+}
+
+const main = async () => {
+    console.log("Hello world");
+
+    timerTest();
 }
 
 main();
