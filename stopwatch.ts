@@ -1,4 +1,4 @@
-export default class Timer {
+export default class Stopwatch {
     private StartTime: number;
     public Elapsed: number;
     
@@ -9,11 +9,11 @@ export default class Timer {
 
     start() {
         this.StartTime = Date.now();
-        console.log(`Started timer at ${this.StartTime}`);
+        console.log(`Started stopwatch at ${this.StartTime}`);
     }
 
     stop() {
-        console.log(`Stopped timer at ${Date.now()}`);
+        console.log(`Stopped stopwatch at ${Date.now()}`);
         this.Elapsed += Date.now() - this.StartTime;
         this.StartTime = 0;
     }

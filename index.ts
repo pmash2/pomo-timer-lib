@@ -1,11 +1,11 @@
-import Timer from './timer';
+import Stopwatch from './stopwatch';
 import sleep from './sleep';
 import { TimeUtilities } from './time-formatter';
 
 const main = async () => {
     console.log("Hello world");
 
-    let tm = new Timer();
+    let tm = new Stopwatch();
 
     tm.start();
     await sleep(2000);
