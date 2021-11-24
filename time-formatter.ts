@@ -5,6 +5,10 @@ type Time = {
     Milliseconds: number;
 }
 
+const zeroPad = (numberToPad: number, totalCharLength: number): string => {
+    return (`0${numberToPad}`).slice(-totalCharLength);
+}
+
 export class TimeUtilities {
 
     static msToTime = (ms: number): Time => {
@@ -26,12 +30,19 @@ export class TimeUtilities {
     }
 
     static timeToString = (tm: Time): string => {
-        let seconds = (`0${tm.Seconds}`).slice(-2);
-        let minutes = (`0${tm.Minutes}`).slice(-2);
-        let hours = (`0${tm.Hours}`).slice(-2);
-        let milliseconds = (`00${tm.Milliseconds}`).slice(-3);
+        let timeString = "";
 
-        return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+        if (tm.Hours) {
+            timeString = zeroPad(tm.Hours, 2) + ":";
+        }
+        if (tm.Minutes) {
+            timeString += zeroPad(tm.Minutes, 2) + ":";
+        }
+
+        timeString += zeroPad(tm.Seconds, 2) + ".";
+        timeString += zeroPad(tm.Milliseconds, 3);
+
+        return timeString;
     }
 
     static msToString = (ms: number): string => {
