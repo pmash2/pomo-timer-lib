@@ -1,11 +1,10 @@
-import Stopwatch from './stopwatch';
-import sleep from './sleep';
-import { TimeUtilities } from './time-formatter';
-import Timer from './timer';
+import Timer from './timer'
+import Time from './Types/time'
 
-export default {
-    TimeUtilities,
-    Timer,
-    Stopwatch,
-    sleep
-};
+export { Time, Timer }
+export const getTimer = (h: number, m: number, s: number, ms: number): Timer => 
+    new Timer(new Time(h, m, s, ms))
+
+export const getRemainingTime = (timer: Timer): string => {
+    return timer.Remaining.ToString()
+}

@@ -1,78 +1,35 @@
-type Time = {
-    Hours: number;
-    Minutes: number;
-    Seconds: number;
-    Milliseconds: number;
-}
+import Time from './Types/time'
 
-const zeroPad = (numberToPad: number, totalCharLength: number): string => {
-    return (`0${numberToPad}`).slice(-totalCharLength);
-}
+const TimeUtilities = {
 
-export class TimeUtilities {
-
-    static msToTime = (ms: number): Time => {
-        let milliseconds = ms % 1000;
-        let seconds = Math.trunc(ms / 1000);
-        const hours = Math.trunc(seconds / 3600);
-        seconds = seconds % 3600;
-        const minutes = Math.trunc(seconds / 60);
-        seconds = seconds % 60;
-
-        let tm = {
-            Hours: hours,
-            Minutes: minutes,
-            Seconds: seconds,
-            Milliseconds: milliseconds
-        };
+    msToTime: (ms: number): Time => {
+        let milliseconds = ms % 1000
+        let seconds = Math.trunc(ms / 1000)
+        const hours = Math.trunc(seconds / 3600)
+        seconds = seconds % 3600
+        const minutes = Math.trunc(seconds / 60)
+        seconds = seconds % 60
         
-        return tm;
-    }
+        return new Time(hours, minutes, seconds, milliseconds)
+    },
 
-    static TimeToMs = (tm: Time): number => {
-        let totalMs = 0;
-        totalMs += tm.Hours * 3.6e+6;
-        totalMs += tm.Minutes * 60000;
-        totalMs += tm.Seconds * 1000;
-        totalMs += tm.Milliseconds;
+    TimeToMs: (tm: Time): number => {
+        let totalMs = 0
+        totalMs += tm.Hours * 3.6e+6
+        totalMs += tm.Minutes * 60000
+        totalMs += tm.Seconds * 1000
+        totalMs += tm.Milliseconds
 
-        return totalMs;
-    }
+        return totalMs
+    },
 
-    static timeToString = (tm: Time): string => {
-        let timeString = "";
+    diff: (greaterTime: Time, lesserTime: Time): Time => {
+        let gMs = TimeUtilities.TimeToMs(greaterTime)
+        let lMs = TimeUtilities.TimeToMs(lesserTime)
+        let diffMs = gMs - lMs
 
-        if (tm.Hours) {
-            timeString = zeroPad(tm.Hours, 2) + ":";
-        }
-        if (tm.Minutes) {
-            timeString += zeroPad(tm.Minutes, 2) + ":";
-        }
-
-        timeString += zeroPad(tm.Seconds, 2) + ".";
-        timeString += zeroPad(tm.Milliseconds, 3);
-
-        return timeString;
-    }
-
-    static msToString = (ms: number): string => {
-        let tm = TimeUtilities.msToTime(ms);
-        return TimeUtilities.timeToString(tm);
-    }
-
-    static diff = (greaterTime: Time, lesserTime: Time): Time => {
-        let gMs = this.TimeToMs(greaterTime);
-        let lMs = this.TimeToMs(lesserTime);
-        let diffMs = gMs - lMs;
-
-        return this.msToTime(diffMs);
-    }
-
-    static diffString = (greaterTime: Time, lesserTime: Time): string => {
-        let tmDiff = this.diff(greaterTime, lesserTime);
-
-        return this.timeToString(tmDiff);
+        return TimeUtilities.msToTime(diffMs)
     }
 }
 
-export { Time }
+export default TimeUtilities
