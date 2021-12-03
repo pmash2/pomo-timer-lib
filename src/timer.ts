@@ -25,7 +25,6 @@ export default class Timer extends EventEmitter {
     }
 
     async start() {
-        console.log("Starting timer...")
         this.Watch.start()
 
         let spanMs = TimeUtilities.TimeToMs(this.Span)
@@ -37,7 +36,6 @@ export default class Timer extends EventEmitter {
     }
 
     stop() {
-        console.log("Stopping timer...")
         this.Watch.stop()
     }
 }

@@ -14,11 +14,9 @@ export default class Stopwatch {
 
     start() {
         this.StartTime = Date.now()
-        console.log(`Started stopwatch at ${this.StartTime}`)
     }
 
     stop() {
-        console.log(`Stopped stopwatch at ${Date.now()}`)
         this.StartTime = 0
     }
 }
