@@ -1,14 +1,7 @@
-const goToSleep = (ms: number) => {
-    return new Promise((resolve) => {
-        console.log("...sleeping...")
+const goToSleep = (ms: number) => new Promise((resolve) => {
         setTimeout(resolve, ms)
     })
-}
 
-const sleep = async (ms: number) => {
-    console.log("Going to sleep")
-    await goToSleep(ms)
-    console.log("Awake!")
-}
+const sleep = async (ms: number) => await goToSleep(ms)
 
 export default sleep
