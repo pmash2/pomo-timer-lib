@@ -3,6 +3,7 @@ import TimeUtilities from "./time-formatter"
 import sleep from "./sleep"
 import EventEmitter from "events"
 import Time from "./Types/time"
+import EmitString from "./Types/emit-strings"
 
 export default class Timer extends EventEmitter {
     private Watch: Stopwatch
@@ -32,7 +33,7 @@ export default class Timer extends EventEmitter {
             await sleep(1000)
         }
 
-        this.emit("TIMER_COMPLETE")
+        this.emit(EmitString.TimerComplete)
     }
 
     stop() {
