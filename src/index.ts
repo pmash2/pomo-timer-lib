@@ -1,8 +1,9 @@
 import Timer from './timer'
 import Pomodoro from './Types/pomodoro'
 import Time from './Types/time'
+import EmitString from './Types/emit-strings'
 
-export { Time, Timer }
+export { Time, Timer, Pomodoro, EmitString }
 export const getTimer = (h: number, m: number, s: number, ms: number): Timer => 
     new Timer(new Time(h, m, s, ms))
 
