@@ -17,11 +17,10 @@ export default class Time {
         if (this.Hours) {
             timeString = this.zeroPad(this.Hours, 2) + ":"
         }
-        if (this.Minutes) {
-            timeString += this.zeroPad(this.Minutes, 2) + ":"
-        }
 
+        timeString += this.zeroPad(this.Minutes, 2) + ":"
         timeString += this.zeroPad(this.Seconds, 2)
+
         if (showMS) {
             timeString += "." + this.zeroPad(this.Milliseconds, 3)
         }
