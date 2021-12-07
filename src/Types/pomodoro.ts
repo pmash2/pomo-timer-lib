@@ -59,6 +59,13 @@ export default class Pomodoro extends EventEmitter {
         this.changePomoState(PomodoroState.Cancelled)
     }
 
+    async restart(): Promise<void> {
+        let tmToStop = this.State === PomodoroState.Pomodoro ? this.WorkTimer : this.BreakTimer
+        this.stopTimer(tmToStop)
+        this.changePomoState(PomodoroState.PendingStart)
+        this.start()
+    }
+
     private pomoComplete = (): void => {
         this.stopTimer(this.WorkTimer)
         this.startTimer(this.BreakTimer)

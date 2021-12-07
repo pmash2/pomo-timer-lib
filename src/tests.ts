@@ -13,6 +13,7 @@ const main = async () => {
     })
     p.on(EmitString.BreakComplete, () => {
         console.log(`EVENT EMITTED: ${EmitString.BreakComplete}!`)
+        p.restart()
     })
 
     console.log(`State: ${p.CurrentState}`)
