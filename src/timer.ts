@@ -7,7 +7,7 @@ import EmitString from "./Types/emit-strings"
 
 export default class Timer extends EventEmitter {
     private Watch: Stopwatch
-    private Span: Time
+    public Span: Time
 
     get Remaining(): Time {
         if (this.Watch.Elapsed > 0) {

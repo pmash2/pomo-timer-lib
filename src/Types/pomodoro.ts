@@ -25,6 +25,17 @@ export default class Pomodoro extends EventEmitter {
         return this.State
     }
 
+    get OriginalTime(): Time {
+        switch (this.State) {
+            case PomodoroState.Pomodoro:
+                return this.WorkTimer.Span
+            case PomodoroState.Break:
+                return this.BreakTimer.Span
+            default:
+                return new Time(0, 0, 0, 0)
+        }
+    }
+
     constructor(workTimer: Timer, breakTimer: Timer) {
         super()
         this.WorkTimer = workTimer
