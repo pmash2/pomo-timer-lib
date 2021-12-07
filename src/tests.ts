@@ -20,7 +20,7 @@ const main = async () => {
 
     await p.start()
     for (let i = 1; i < 10; i++) {
-        console.log(`State: ${p.CurrentState.toString()}, Remaining: ${p.Remaining.ToString()}, Original Time: ${p.OriginalTime.ToString()}`)
+        console.log(`State: ${p.CurrentState.toString()}, Remaining: ${p.Remaining.ToString(false)}, Original Time: ${p.OriginalTime.ToString()}`)
         await sleep(1000)
     }
 

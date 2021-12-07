@@ -11,7 +11,7 @@ export default class Time {
         this.Milliseconds = ms
     }
 
-    ToString = (): string => {
+    ToString = (showMS: boolean = true): string => {
         let timeString = ""
 
         if (this.Hours) {
@@ -21,8 +21,10 @@ export default class Time {
             timeString += this.zeroPad(this.Minutes, 2) + ":"
         }
 
-        timeString += this.zeroPad(this.Seconds, 2) + "."
-        timeString += this.zeroPad(this.Milliseconds, 3)
+        timeString += this.zeroPad(this.Seconds, 2)
+        if (showMS) {
+            timeString += "." + this.zeroPad(this.Milliseconds, 3)
+        }
 
         return timeString
     }
