@@ -1,25 +1,36 @@
 {
-  "name": "pomo-timer-lib",
-  "version": "0.4.2",
-  "description": "Library of methods used for running pomodoro timers",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts",
-    "build": "tsc"
-  },
-  "author": "Phil Ashton",
-  "license": "ISC",
-  "devDependencies": {
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.2",
-    "yalc": "^1.0.0-pre.53"
-  },
-  "dependencies": {
-    "events": "^3.3.0"
-  },
-  "files": [
-    "dist/"
-  ]
+	"name": "@pmash2/pomo-timer-lib",
+	"version": "0.4.2",
+	"description": "Library of methods used for running pomodoro timers",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "ts-node src/index.ts",
+		"build": "tsc"
+	},
+	"author": "Phil Ashton",
+	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pmash2/pomo-timer-lib.git"
+	},
+	"bugs": {
+		"url": "https://github.com/pmash2/pomo-timer-lib/issues"
+	},
+	"homepage": "https://github.com/pmash2/pomo-timer-lib#readme",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
+	"devDependencies": {
+		"ts-node": "^10.4.0",
+		"typescript": "^4.5.2",
+		"yalc": "^1.0.0-pre.53"
+	},
+	"dependencies": {
+		"events": "^3.3.0"
+	},
+	"files": [
+		"dist/"
+	]
 }
