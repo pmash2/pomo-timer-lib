@@ -20,7 +20,7 @@
 	},
 	"homepage": "https://github.com/pmash2/pomo-timer-lib#readme",
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
+		"registry": "https://registry.npmjs.org/"
 	},
 	"devDependencies": {
 		"ts-node": "^10.4.0",
