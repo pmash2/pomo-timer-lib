@@ -6,4 +6,5 @@ enum PomodoroState {
     Cancelled = "Cancelled"
 }
 
+// TODO: Expose this in library
 export default PomodoroState
