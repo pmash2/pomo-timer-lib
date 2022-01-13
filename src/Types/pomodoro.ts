@@ -1,7 +1,7 @@
-import { Time } from ".."
 import Timer from "./timer"
 import EventEmitter from "events"
 import * as Enums from "../Enums/enums"
+import Time from "./time"
 
 const pomoStates = Enums.PomodoroState
 const emitStrings = Enums.EmitString
