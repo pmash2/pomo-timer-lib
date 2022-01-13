@@ -1,34 +1,35 @@
 import { Time } from ".."
 import Timer from "../timer"
-import PomodoroState from "./pomodoro-state"
 import EventEmitter from "events"
-import EmitString from "./emit-strings"
+import * as Enums from "../Enums/enums"
 
+const pomoStates = Enums.PomodoroState
+const emitStrings = Enums.EmitString
 export default class Pomodoro extends EventEmitter {
 	private WorkTimer: Timer
 	private BreakTimer: Timer
-	private State: PomodoroState
+	private State: Enums.PomodoroState
 
 	get Remaining(): Time {
 		switch (this.State) {
-			case PomodoroState.Pomodoro:
+			case pomoStates.Pomodoro:
 				return this.WorkTimer.Remaining
-			case PomodoroState.Break:
+			case pomoStates.Break:
 				return this.BreakTimer.Remaining
 			default:
 				return new Time(0, 0, 0, 0)
 		}
 	}
 
-	get CurrentState(): PomodoroState {
+	get CurrentState(): Enums.PomodoroState {
 		return this.State
 	}
 
 	get OriginalTime(): Time {
 		switch (this.State) {
-			case PomodoroState.Pomodoro:
+			case pomoStates.Pomodoro:
 				return this.WorkTimer.Span
-			case PomodoroState.Break:
+			case pomoStates.Break:
 				return this.BreakTimer.Span
 			default:
 				return new Time(0, 0, 0, 0)
@@ -39,29 +40,29 @@ export default class Pomodoro extends EventEmitter {
 		super()
 		this.WorkTimer = workTimer
 		this.BreakTimer = breakTimer
-		this.State = PomodoroState.PendingStart
+		this.State = pomoStates.PendingStart
 
-		this.WorkTimer.on(EmitString.TimerComplete, this.pomoComplete)
-		this.BreakTimer.on(EmitString.TimerComplete, this.breakComplete)
+		this.WorkTimer.on(emitStrings.TimerComplete, this.pomoComplete)
+		this.BreakTimer.on(emitStrings.TimerComplete, this.breakComplete)
 	}
 
 	async start(): Promise<void> {
-		if (this.State === PomodoroState.PendingStart) {
+		if (this.State === pomoStates.PendingStart) {
 			this.startTimer(this.WorkTimer)
-			this.changePomoState(PomodoroState.Pomodoro)
+			this.changePomoState(pomoStates.Pomodoro)
 		}
 	}
 
 	stop(): void {
-		let tmToStop = this.State === PomodoroState.Pomodoro ? this.WorkTimer : this.BreakTimer
+		let tmToStop = this.State === pomoStates.Pomodoro ? this.WorkTimer : this.BreakTimer
 		this.stopTimer(tmToStop)
-		this.changePomoState(PomodoroState.Cancelled)
+		this.changePomoState(pomoStates.Cancelled)
 	}
 
 	async restart(): Promise<void> {
-		let tmToStop = this.State === PomodoroState.Pomodoro ? this.WorkTimer : this.BreakTimer
+		let tmToStop = this.State === pomoStates.Pomodoro ? this.WorkTimer : this.BreakTimer
 		this.stopTimer(tmToStop)
-		this.changePomoState(PomodoroState.PendingStart)
+		this.changePomoState(pomoStates.PendingStart)
 		this.start()
 	}
 
@@ -69,17 +70,17 @@ export default class Pomodoro extends EventEmitter {
 		this.stopTimer(this.WorkTimer)
 		this.startTimer(this.BreakTimer)
 
-		this.changePomoState(PomodoroState.Break)
-		this.emit(EmitString.PomodoroComplete)
+		this.changePomoState(pomoStates.Break)
+		this.emit(emitStrings.PomodoroComplete)
 	}
 
 	private breakComplete = (): void => {
 		this.stopTimer(this.BreakTimer)
-		this.changePomoState(PomodoroState.Completed)
-		this.emit(EmitString.BreakComplete)
+		this.changePomoState(pomoStates.Completed)
+		this.emit(emitStrings.BreakComplete)
 	}
 
-	private changePomoState = (s: PomodoroState): PomodoroState => (this.State = s)
+	private changePomoState = (s: Enums.PomodoroState): Enums.PomodoroState => (this.State = s)
 	private startTimer = (t: Timer): Promise<void> => t.start()
 	private stopTimer = (t: Timer): void => t.stop()
 }

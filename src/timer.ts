@@ -3,7 +3,7 @@ import TimeUtilities from "./time-formatter"
 import sleep from "./sleep"
 import EventEmitter from "events"
 import Time from "./Types/time"
-import EmitString from "./Types/emit-strings"
+import EmitString from "./Enums/emit-strings"
 
 export default class Timer extends EventEmitter {
     private Watch: Stopwatch
