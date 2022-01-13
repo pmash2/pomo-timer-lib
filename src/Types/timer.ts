@@ -3,7 +3,7 @@ import TimeUtilities from "../Helpers/time-formatter"
 import sleep from "../Helpers/sleep"
 import EventEmitter from "events"
 import Time from "./time"
-import EmitString from "../Enums/emit-strings"
+import * as Enums from "../Enums/enums"
 
 export default class Timer extends EventEmitter {
 	private Watch: Stopwatch
@@ -32,7 +32,7 @@ export default class Timer extends EventEmitter {
 			await sleep(1000)
 		}
 
-		this.emit(EmitString.TimerComplete)
+		this.emit(Enums.EmitString.TimerComplete)
 	}
 
 	stop() {
