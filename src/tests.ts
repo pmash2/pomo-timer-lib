@@ -1,7 +1,7 @@
 import * as modFuncs from './index'
-import sleep from "./sleep"
+import sleep from "./Helpers/sleep"
 import { Enums } from "./"
-import TimeUtilities from "./time-formatter"
+import TimeUtilities from "./Helpers/time-formatter"
 
 const main = async () => {
 	console.log("Hello world")

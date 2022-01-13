@@ -1,5 +1,5 @@
 import { Time } from ".."
-import Timer from "../timer"
+import Timer from "./timer"
 import EventEmitter from "events"
 import * as Enums from "../Enums/enums"
 
