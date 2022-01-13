@@ -29,7 +29,14 @@ const TimeUtilities = {
         let diffMs = gMs - lMs
 
         return TimeUtilities.msToTime(diffMs)
-    }
+    },
+
+	percentCompleted: (partial: Time, total: Time): number => {
+		let msPartial = TimeUtilities.TimeToMs(partial)
+		let msTotal = TimeUtilities.TimeToMs(total)
+
+		return Math.round((msPartial / msTotal) * 100)
+	}
 }
 
 export default TimeUtilities

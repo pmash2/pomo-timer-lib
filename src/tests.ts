@@ -1,6 +1,7 @@
 import * as modFuncs from './index'
 import sleep from "./sleep"
 import { Enums } from "./"
+import TimeUtilities from "./time-formatter"
 
 const main = async () => {
 	console.log("Hello world")
@@ -20,11 +21,14 @@ const main = async () => {
 
 	await p.start()
 	for (let i = 1; i < 10; i++) {
-		console.log(
-			`State: ${p.CurrentState.toString()}, Remaining: ${p.Remaining.ToString(
-				false
-			)}, Original Time: ${p.OriginalTime.ToString()}`
-		)
+		const percentComplete = 100 - TimeUtilities.percentCompleted(p.Remaining, p.OriginalTime)
+
+		const stateStr = `State: ${p.CurrentState.toString()}`
+		const remStr = `Remaining: ${p.Remaining.ToString(false)}`
+		const origStr = `Original Time: ${p.OriginalTime.ToString()}`
+		const percentStr = `${percentComplete}% completed`
+
+		console.log([stateStr, remStr, origStr, percentStr].join(", "))
 		await sleep(1000)
 	}
 
