@@ -2,6 +2,7 @@ import Timer from "./timer"
 import EventEmitter from "events"
 import * as Enums from "../Enums/enums"
 import Time from "./time"
+import TimeUtilities from "../Helpers/time-formatter"
 
 const pomoStates = Enums.PomodoroState
 const emitStrings = Enums.EmitString
@@ -34,6 +35,14 @@ export default class Pomodoro extends EventEmitter {
 			default:
 				return new Time(0, 0, 0, 0)
 		}
+	}
+
+	get PercentCompleted(): number {
+		return 100 - TimeUtilities.percentCompleted(this.Remaining, this.OriginalTime)
+	}
+
+	get PercentRemaining(): number {
+		return TimeUtilities.percentCompleted(this.Remaining, this.OriginalTime)
 	}
 
 	constructor(workTimer: Timer, breakTimer: Timer) {

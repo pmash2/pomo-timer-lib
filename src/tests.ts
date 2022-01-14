@@ -1,7 +1,7 @@
 import * as modFuncs from './index'
 import sleep from "./Helpers/sleep"
-import { Enums } from "./"
-import TimeUtilities from "./Helpers/time-formatter"
+
+const emitStrings = modFuncs.Enums.EmitString
 
 const main = async () => {
 	console.log("Hello world")
@@ -9,11 +9,11 @@ const main = async () => {
 	let wrk = modFuncs.getTimer(0, 0, 5, 0)
 	let brk = modFuncs.getTimer(0, 0, 3, 0)
 	let p = modFuncs.getPomodoro(wrk, brk)
-	p.on(Enums.EmitString.PomodoroComplete, () => {
-		console.log(`EVENT EMITTED: ${Enums.EmitString.PomodoroComplete}!`)
+	p.on(emitStrings.PomodoroComplete, () => {
+		console.log(`EVENT EMITTED: ${emitStrings.PomodoroComplete}!`)
 	})
-	p.on(Enums.EmitString.BreakComplete, () => {
-		console.log(`EVENT EMITTED: ${Enums.EmitString.BreakComplete}!`)
+	p.on(emitStrings.BreakComplete, () => {
+		console.log(`EVENT EMITTED: ${emitStrings.BreakComplete}!`)
 		p.restart()
 	})
 
@@ -21,14 +21,13 @@ const main = async () => {
 
 	await p.start()
 	for (let i = 1; i < 10; i++) {
-		const percentComplete = 100 - TimeUtilities.percentCompleted(p.Remaining, p.OriginalTime)
-
 		const stateStr = `State: ${p.CurrentState.toString()}`
 		const remStr = `Remaining: ${p.Remaining.ToString(false)}`
 		const origStr = `Original Time: ${p.OriginalTime.ToString()}`
-		const percentStr = `${percentComplete}% completed`
+		const percentStr = `${p.PercentCompleted}% completed`
+		const remPerStr = `${p.PercentRemaining}% remaining`
 
-		console.log([stateStr, remStr, origStr, percentStr].join(", "))
+		console.log([stateStr, remStr, origStr, percentStr, remPerStr].join(", "))
 		await sleep(1000)
 	}
 
