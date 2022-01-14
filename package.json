@@ -1,6 +1,6 @@
 {
 	"name": "@pmash2/pomo-timer-lib",
-	"version": "0.4.4",
+	"version": "0.5.0",
 	"description": "Library of methods used for running pomodoro timers",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
