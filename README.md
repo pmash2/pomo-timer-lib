@@ -4,14 +4,25 @@ Library of methods used to manage and run pomodoro timers
 
 ## Usage
 
-Thanks to `ts-node`, you can run via `npm start` without compiling. Otherwise, `npm run build`, then `node dist/index.js`
+Basic usage involves creating two timers, one for a work session and one for a break session. These are then used to create a `Pomodoro`.
 
-## Development
+```TypeScript
+const pLib = require("@pmash2/pomo-timer-lib")
 
-To create local packages for use in other projects:
+const workSession: Timer = pLib.getTimer(0, 30, 0, 0) // Create 30 min timer
+const breakSession: Timer = pLib.getTimer(0, 10, 0, 0) // Create 10 min timer
 
-1. Increment version in `package.json`
-2. Run `npm pack`
-3. Take `.tgz` file that was created and move it to a local package location (e.g., `~/source/npm_packages`)
-4. Go to the project you want to use package in
-5. Run `npm install`, pointing to the location you placed the package (e.g., `npm install ~/source/npm_packages/pomo-timer-lib-0.1.2.tgz`)
+const pomo: Pomodoro = pLib.getPomodoro(workSession, breakSession)
+```
+
+At this point, the pomodoro can be started, stopped, or restarted. Upon the completion of either session (work or break), an event is emitted, which is documented in `Enums.EmitString`:
+
+```js
+...
+pomo.on(pLib.Enums.EmitString.PomodoroComplete, pomoCompleteFunc)
+pomo.on(pLib.Enums.EmitString.BreakComplete, breakCompleteFunc)
+
+await pomo.start()
+```
+
+`Enums` also exposes the different states a pomodoro can be in via `Enums.PomodoroState`, which corresponds to the value returned via `.CurrentState` on your pomodoro object.
